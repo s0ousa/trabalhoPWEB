@@ -8,6 +8,7 @@ import com.luis.trabalhoPweb.entities.Medico;
 
 public class MedicoDTO {
 
+    private Long id;
     private String nome;
     private String email;
     private String telefone;
@@ -19,7 +20,8 @@ public class MedicoDTO {
     public MedicoDTO() {
     }
 
-    public MedicoDTO(String nome, String email, String telefone, String crm, Especialidade especialidade, Endereco endereco) {
+    public MedicoDTO(Long id,String nome, String email, String telefone, String crm, Especialidade especialidade, Endereco endereco) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -29,6 +31,7 @@ public class MedicoDTO {
     }
 
     public MedicoDTO(Medico entidade) {
+        this.id = entidade.getId();
         this.nome = entidade.getNome();
         this.email = entidade.getEmail();
         this.telefone = entidade.getTelefone();

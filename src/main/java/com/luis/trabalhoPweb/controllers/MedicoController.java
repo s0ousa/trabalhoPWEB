@@ -18,14 +18,13 @@ public class MedicoController {
     private MedicoService medicoService;
 
     @GetMapping(value = "/{id}")
-    public MedicoMinDTO findById(@PathVariable Long id) {
+    public ResponseEntity<MedicoMinDTO> findById(@PathVariable Long id) {
         return medicoService.findById(id);
     }
 
     @GetMapping
     public List<MedicoMinDTO> findAll() {
         return medicoService.findAll();
-
     }
 
 

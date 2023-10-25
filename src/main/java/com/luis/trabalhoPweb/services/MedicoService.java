@@ -25,9 +25,10 @@ public class MedicoService {
 
 
     @Transactional(readOnly = true)
-    public MedicoMinDTO findById(Long id) {
+    public ResponseEntity<MedicoMinDTO> findById(Long id) {
         Medico result = medicoRepository.findById(id).get();
-        return new MedicoMinDTO(result);
+        MedicoMinDTO dto = new MedicoMinDTO(result);
+        return ResponseEntity.ok(dto);
     }
 
     @Transactional(readOnly = true)

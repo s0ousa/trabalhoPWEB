@@ -20,11 +20,11 @@ public class Medico {
     private Especialidade especialidade;
     @OneToOne
     private Endereco endereco;
-
+    private Boolean ativo;
     public Medico() {
     }
 
-    public Medico(Long id, String nome, String email, String telefone, String crm, Especialidade especialidade, Endereco endereco) {
+    public Medico(Long id, String nome, String email, String telefone, String crm, Especialidade especialidade, Endereco endereco, Boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -32,6 +32,7 @@ public class Medico {
         this.crm = crm;
         this.especialidade = especialidade;
         this.endereco = endereco;
+        this.ativo = ativo;
     }
 
     public Medico(MedicoDTO medicoDTO) {
@@ -41,6 +42,7 @@ public class Medico {
         this.crm = medicoDTO.getCrm();
         this.especialidade = medicoDTO.getEspecialidade();
         this.endereco = medicoDTO.getEndereco();
+        this.ativo = ativo;
     }
 
     @Override
@@ -110,5 +112,13 @@ public class Medico {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }

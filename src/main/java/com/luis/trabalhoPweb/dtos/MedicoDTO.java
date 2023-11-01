@@ -16,7 +16,8 @@ public class MedicoDTO {
     private Long id;
     @NotBlank(message = "Nome não pode estar em branco.")
     private String nome;
-    @NotBlank @Email(message = "Endereço de email inválido.")
+    @NotBlank
+    @Email(message = "Endereço de email inválido.")
     private String email;
     @NotBlank
     private String telefone;
@@ -24,7 +25,7 @@ public class MedicoDTO {
     private String crm;
     @NotBlank
     private Especialidade especialidade;
-    @NotBlank
+    @NotBlank (message = "Endereco não pode estar em branco.")
     private Endereco endereco;
     private Boolean ativo;
 

@@ -1,6 +1,7 @@
 package com.luis.trabalhoPweb.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
 
@@ -14,13 +15,25 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Logradouro não pode estar em branco.")
     private String logradouro;
+
     private int numero;
     private String complemento;
+
+    @NotBlank(message = "Bairro não pode estar em branco.")
     private String bairro;
+
+    @NotBlank(message = "Cidade não pode estar em branco.")
     private String cidade;
+
+    @NotBlank(message = "UF não pode estar em branco.")
     private String uf;
+
+    @NotBlank(message = "CEP não pode estar em branco.")
     private String cep;
+
     @OneToMany
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Medico> medicos;
@@ -28,8 +41,7 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(Long id, String logradouro, int numero, String complemento, String bairro, String cidade, String uf, String cep) {
-        this.id = id;
+    public Endereco(String logradouro, int numero, String complemento, String bairro, String cidade, String uf, String cep) {
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;

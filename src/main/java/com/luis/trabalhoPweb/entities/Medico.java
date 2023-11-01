@@ -2,6 +2,7 @@ package com.luis.trabalhoPweb.entities;
 
 import com.luis.trabalhoPweb.dtos.MedicoDTO;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.Objects;
 
@@ -18,7 +19,8 @@ public class Medico {
     private String crm;
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
-    @OneToOne
+    @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Endereco endereco;
     private Boolean ativo;
     public Medico() {

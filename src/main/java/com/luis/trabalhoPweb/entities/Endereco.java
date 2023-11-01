@@ -1,9 +1,13 @@
 package com.luis.trabalhoPweb.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
+import java.util.List;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "tb_endereco")
 public class Endereco {
@@ -17,6 +21,9 @@ public class Endereco {
     private String cidade;
     private String uf;
     private String cep;
+    @OneToMany
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Medico> medicos;
 
     public Endereco() {
     }

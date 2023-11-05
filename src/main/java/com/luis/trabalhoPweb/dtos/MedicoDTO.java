@@ -3,8 +3,10 @@ package com.luis.trabalhoPweb.dtos;
 import com.luis.trabalhoPweb.entities.Endereco;
 import com.luis.trabalhoPweb.entities.Especialidade;
 import com.luis.trabalhoPweb.entities.Medico;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Data
@@ -25,7 +27,8 @@ public class MedicoDTO {
     private String crm;
     @NotBlank
     private Especialidade especialidade;
-    @NotBlank (message = "Endereco não pode estar em branco.")
+    @Valid
+    @NotNull(message = "Endereco não pode estar em branco.")
     private Endereco endereco;
     private Boolean ativo = true;
 

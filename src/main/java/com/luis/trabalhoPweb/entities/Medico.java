@@ -44,7 +44,7 @@ public class Medico {
         this.crm = medicoDTO.getCrm();
         this.especialidade = medicoDTO.getEspecialidade();
         this.endereco = medicoDTO.getEndereco();
-        this.ativo = ativo;
+        this.ativo = medicoDTO.getAtivo();
     }
 
     @Override

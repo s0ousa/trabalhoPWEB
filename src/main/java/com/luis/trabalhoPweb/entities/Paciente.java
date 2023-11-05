@@ -34,7 +34,7 @@ public class Paciente {
         this.email = dto.getEmail();
         this.telefone = dto.getTelefone();
         this.cpf = dto.getCpf();
-        this.endereco = dto.getEndereco();
+        this.endereco = new Endereco(dto.getEndereco());
         this.ativo = dto.getAtivo();
     }
 }

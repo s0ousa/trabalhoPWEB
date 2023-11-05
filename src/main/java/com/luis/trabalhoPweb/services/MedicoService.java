@@ -20,28 +20,21 @@ import java.util.Optional;
 public class MedicoService {
     @Autowired
     private MedicoRepository medicoRepository;
-
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-
-
-    @Transactional(readOnly = true)
-    private MedicoDTO findById(Long id) {
-        Medico result = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medico nao encontrado"));
-        return new MedicoDTO(result);
-    }
+//    @Transactional(readOnly = true)
+//    //metodo privado, somente para uso interno da classe
+//    private MedicoDTO findById(Long id) {
+//        Medico result = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medico nao encontrado"));
+//        return new MedicoDTO(result);
+//    }
 
     @Transactional(readOnly = true)
     public MedicoDTO searchById(Long id) {
-        Medico result = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medico nao encontrado"));
-        return MedicoDTO.builder()
-                .id(result.getId())
-                .nome(result.getNome())
-                .email(result.getEmail())
-                .crm(result.getCrm())
-                .especialidade(result.getEspecialidade())
-                .build();
+        Medico result = medicoRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Medico nao encontrado"));
+        return new MedicoDTO(result);
     }
 
     @Transactional(readOnly = true)
@@ -57,44 +50,51 @@ public class MedicoService {
 
     public MedicoDTO create(MedicoDTO medicoDTO) {
         Medico novoMedico = new Medico(medicoDTO);
-        medicoRepository.save(novoMedico);
         return new MedicoDTO(medicoRepository.save(novoMedico));
     }
 
    public MedicoDTO updateById(Long id, MedicoDTO dto) {
-        validaEmailPUTDTO(dto);
-        validaCrm(dto);
-        validaEspecialidade(dto);
+       // nao pode atualizar esses campos
+       checaEmail(dto);
+       checaCrm(dto);
+       checaEspecialidade(dto);
 
-       Medico entidade = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medico nao encontrado"));
-       entidade.setNome(dto.getNome());
-       entidade.setTelefone(dto.getTelefone());
-       entidade.setEndereco(dto.getEndereco());
+       Medico entidade = medicoRepository.findById(id).orElseThrow(
+               () -> new RuntimeException("Medico nao encontrado"));
+
+       if (dto.getNome()!=null)
+           entidade.setNome(dto.getNome());
+       if (dto.getTelefone()!=null)
+           entidade.setTelefone(dto.getTelefone());
+       if (dto.getEndereco()!=null)
+           entidade.setEndereco(dto.getEndereco());
+       if (dto.getAtivo()!=null)
+           entidade.setAtivo(dto.getAtivo());
 
        return new MedicoDTO(medicoRepository.save(entidade));
    }
 
-
    public MedicoDTO inativa(Long id) {
-       Medico entidade = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medico nao encontrado"));
+       Medico entidade = medicoRepository.findById(id).orElseThrow(
+               () -> new RuntimeException("Medico nao encontrado"));
+
        entidade.setAtivo(false);
 
        return new MedicoDTO(medicoRepository.save(entidade));
    }
-   public void validaEmailPUTDTO(MedicoDTO dto) {
+   public void checaEmail(MedicoDTO dto) {
        if(Optional.ofNullable(dto.getEmail()).isPresent()) {
            throw new RuntimeException("Não pode atualizar email");
        }
    }
 
-
-   public void validaCrm(MedicoDTO dto) {
+   public void checaCrm(MedicoDTO dto) {
        if(Optional.ofNullable(dto.getCrm()).isPresent()){
            throw new RuntimeException();
        }
    }
 
-    public void validaEspecialidade(MedicoDTO dto) {
+    public void checaEspecialidade(MedicoDTO dto) {
         if(Optional.ofNullable(dto.getEspecialidade()).isPresent()){
             throw new RuntimeException();
         }

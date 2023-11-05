@@ -5,11 +5,17 @@ import com.luis.trabalhoPweb.entities.Paciente;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 @Builder
 public class PacienteDTO {
 
@@ -25,25 +31,10 @@ public class PacienteDTO {
     @NotBlank @CPF (message = "CPF não pode estar em branco.")
     private String cpf;
 
-//    @Valid
-//    @NotBlank (message = "Endereco não pode estar em branco.")
-    private Endereco endereco;
+    @Valid
+    @NotNull(message = "Endereco não pode estar em branco.")
+    private EnderecoDTO endereco;
     private Boolean ativo = true;
-
-
-    public PacienteDTO() {
-    }
-
-    public PacienteDTO(Long id, String nome, String email, String telefone, String cpf, Endereco endereco, Boolean ativo) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.ativo = ativo;
-
-    }
 
     public PacienteDTO(Paciente entidade) {
         this.id = entidade.getId();
@@ -51,7 +42,7 @@ public class PacienteDTO {
         this.email = entidade.getEmail();
         this.telefone = entidade.getTelefone();
         this.cpf = entidade.getCpf();
-        this.endereco = entidade.getEndereco();
+        this.endereco = new EnderecoDTO(entidade.getEndereco());
         this.ativo = entidade.getAtivo();
     }
 }

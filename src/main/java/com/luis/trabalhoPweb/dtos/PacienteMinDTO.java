@@ -1,26 +1,27 @@
 package com.luis.trabalhoPweb.dtos;
 
-import com.luis.trabalhoPweb.entities.Especialidade;
 import com.luis.trabalhoPweb.entities.Medico;
+import com.luis.trabalhoPweb.entities.Paciente;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.hibernate.validator.constraints.br.CPF;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicoMinDTO {
+public class PacienteMinDTO {
 
     private String nome;
     private String email;
-    private String crm;
-    private Especialidade especialidade;
+    private String cpf;
 
-    public MedicoMinDTO(Medico entidade) {
+    public PacienteMinDTO(Paciente entidade) {
         this.nome = entidade.getNome();
         this.email = entidade.getEmail();
-        this.crm = entidade.getCrm();
-        this.especialidade = entidade.getEspecialidade();
+        this.cpf = entidade.getCpf();
     }
+
 }

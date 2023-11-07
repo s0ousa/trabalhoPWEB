@@ -38,7 +38,6 @@ public class MedicoController {
 
     @PutMapping(value = "/{id}")
     public MedicoDTO update(@PathVariable Long id, @RequestBody MedicoDTO dto) {
-        System.out.println(dto);
         return medicoService.updateById(id, dto);
     }
 

@@ -10,11 +10,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicoService {
@@ -98,5 +104,25 @@ public class MedicoService {
         if(Optional.ofNullable(dto.getEspecialidade()).isPresent()){
             throw new RuntimeException();
         }
+    }
+
+    public Medico buscaMedico(Long id) {
+        return medicoRepository.findByIdAndAtivo(id, true).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medico nao encontrada"));
+    }
+
+    public List<Medico> buscaMedicosDisponiveis(List<Long> idsMedicosIndisponiveis) {
+        Optional<List<Medico>> todosMedicos = medicoRepository.findAllByAtivo(true);
+
+        Map<Long, Medico > map = todosMedicos.get().stream()
+                .collect(Collectors.toMap(Medico::getId, Function.identity()));
+
+        for(Long medicoId : idsMedicosIndisponiveis) {
+                map.remove(medicoId);
+        }
+
+        List<Medico> medicosDisponiveis = new ArrayList<Medico>(map.values());
+
+        return medicosDisponiveis;
     }
 }

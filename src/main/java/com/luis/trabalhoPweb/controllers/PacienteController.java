@@ -36,6 +36,10 @@ public class PacienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.create(pacienteDTO));
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<PacienteDTO> updateById(@PathVariable Long id, @RequestBody PacienteDTO pacienteDTO) {
+        return  ResponseEntity.status(HttpStatus.OK).body(pacienteService.updateById(id, pacienteDTO));
+    }
 
     @DeleteMapping(value = "/{id}")
     public PacienteDTO inativa(@PathVariable Long id) {

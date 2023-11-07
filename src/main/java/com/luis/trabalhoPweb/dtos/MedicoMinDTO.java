@@ -11,13 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicoMinDTO {
-
+    private Long id;
     private String nome;
     private String email;
     private String crm;
     private Especialidade especialidade;
 
     public MedicoMinDTO(Medico entidade) {
+        this.id =entidade.getId();
         this.nome = entidade.getNome();
         this.email = entidade.getEmail();
         this.crm = entidade.getCrm();

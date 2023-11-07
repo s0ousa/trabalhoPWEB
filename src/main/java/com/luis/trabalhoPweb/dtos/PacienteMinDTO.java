@@ -14,11 +14,13 @@ import org.hibernate.validator.constraints.br.CPF;
 @AllArgsConstructor
 public class PacienteMinDTO {
 
+    private Long id;
     private String nome;
     private String email;
     private String cpf;
 
     public PacienteMinDTO(Paciente entidade) {
+        this.id = entidade.getId();
         this.nome = entidade.getNome();
         this.email = entidade.getEmail();
         this.cpf = entidade.getCpf();

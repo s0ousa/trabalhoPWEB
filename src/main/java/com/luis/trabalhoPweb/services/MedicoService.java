@@ -108,7 +108,7 @@ public class MedicoService {
 
     public Medico buscaMedico(Long id) {
         return medicoRepository.findByIdAndAtivo(id, true).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medico nao encontrada"));
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medico nao encontrada ou inativo"));
     }
 
     public List<Medico> buscaMedicosDisponiveis(List<Long> idsMedicosIndisponiveis) {

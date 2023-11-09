@@ -1,16 +1,11 @@
 package com.luis.trabalhoPweb.dtos;
 
 import com.luis.trabalhoPweb.entities.Endereco;
-import com.luis.trabalhoPweb.entities.Medico;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

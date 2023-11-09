@@ -31,11 +31,5 @@ public class Consulta {
     private boolean ativo;
     @Enumerated(EnumType.STRING)
     private EnumMotivoDeCancelamento motivoDeCancelamento;
-//    public Consulta(ConsultaDTO dto) {
-//        this.id = dto.getId();
-//        this.paciente = dto.getPaciente();
-//        this.medico = dto.getMedico();
-//        this.agendamento = dto.getAgendamento();
-//        this.ativo = dto.isAtivo();
-//    }
+
 }
